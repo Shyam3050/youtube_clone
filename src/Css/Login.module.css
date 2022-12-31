@@ -1,0 +1,20 @@
+.container {
+    margin: 2rem;
+}
+.youtube {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.youtube > * {
+  margin: 0.75rem;
+}
+
+.youtube button {
+  background-color: white;
+  color: black;
+  padding: 0.5rem;
+}
