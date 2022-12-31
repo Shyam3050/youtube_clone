@@ -16,3 +16,11 @@
 - youtube data API
 - Tailwind css
 - Redux.js ( global state management )
+
+# Future roadmap
+#### working on mobile responsive.
+#### adding Authentication throw firebase
+#### comment section
+#### watch later page
+#### like page
+#### channel info page
