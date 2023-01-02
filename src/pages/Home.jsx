@@ -14,6 +14,8 @@ import MiniGuideBar from "../Component/MiniGuideBar";
 const Home = () => {
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.youtube_clone.videos);
+  const sideBarVisibility = useSelector((state) => state.UI.sideBarVisibility);
+  console.log(sideBarVisibility);
 
   useEffect(() => {
     dispatch(clearVideos());
@@ -28,9 +30,10 @@ const Home = () => {
       <div>
         <Navbar />
       </div>
-      <div className="flex" style={{ height: "92.5vh" }}>
+      <div className="" style={{ height: "92.5vh" }}>
         <div style={{ width: "72px" }}>
           <MiniGuideBar />
+          {sideBarVisibility && <Sidebar />}
         </div>
 
         {videos.length ? (
@@ -41,21 +44,25 @@ const Home = () => {
             loader={<Spinner />}
             height={650}
           >
-            <div className="grid grid-cols-1  tablet:grid-cols-2 laptop:grid-cols-4 gap-y-14 gap-x-12  p-8">
-              {videos.map((item) => {
-                const ran_num = Math.random();
-                return (
-                  <Card data={item} key={item.videoId + ran_num.toString()} />
-                );
-              })}
+            <div className="grid_main_container">
+              <div className=" grid_container ">
+                {videos.map((item) => {
+                  const ran_num = Math.random() * Math.random();
+                  return (
+                    <Card data={item} key={item.videoId + ran_num.toString()} />
+                  );
+                })}
+              </div>
             </div>
           </InfiniteScroll>
         ) : (
-          <div className="grid grid-cols-1  tablet:grid-cols-2 laptop:grid-cols-4 gap-y-14 gap-x-12  p-8 overflow-y-scroll">
-            {[...Array(10)].map(() => {
-              const adduniquenesstokey = Math.random() * Math.random();
-              return <VideoSkelton key={adduniquenesstokey.toString()} />;
-            })}
+          <div className="grid_main_container ">
+            <div className="grid_container overflow-scroll">
+              {[...Array(10)].map(() => {
+                const adduniquenesstokey = Math.random() * Math.random();
+                return <VideoSkelton key={adduniquenesstokey.toString()} />;
+              })}
+            </div>
           </div>
         )}
       </div>

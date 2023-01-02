@@ -1,4 +1,7 @@
 .miniBar{
+    position: fixed;
+    top: 3.5rem;
+    left: 0;
     width: 68.16px ;
     background-color: #18181B;
 }

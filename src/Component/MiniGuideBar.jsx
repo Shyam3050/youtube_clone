@@ -24,7 +24,7 @@ const MiniGuideBar = () => {
   ];
   return <div className={styles.miniBar} >
  <ul>
-    {mainLinks.map(item => <li className={styles.icon}>{item.icon} <span className={styles.icon_span}>{item.name}</span></li>)}
+    {mainLinks.map(item => <li key={item.name} className={styles.icon}>{item.icon} <span className={styles.icon_span}>{item.name}</span></li>)}
  </ul>
   </div>;
 };

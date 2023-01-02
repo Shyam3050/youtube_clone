@@ -6,7 +6,7 @@ const VideoSkelton = () => {
   return (
     <div style={{ width: "100%", margin: "1rem 0" }} >
       <SkeletonTheme color="white" baseColor="#6A6969" highlightColor="#202020">
-        <Skeleton height={150} width={220} />
+        <Skeleton height={150} width={274} />
         <div>
           <Skeleton
             style={{ margin: "0.5rem" }}

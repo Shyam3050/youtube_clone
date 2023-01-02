@@ -10,6 +10,7 @@ import {
   clearSearchPageVideo,
   changeSearchTerm,
   clearSearchTerm,
+  sideBarVisibilityUpdate
 } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -32,9 +33,9 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="flex justify-between pl-7 pr-14 h-14 items-center  bg-[#212121] opacity-95 sticky">
+    <nav className="flex justify-between pl-6 pr-14 h-14 items-center  bg-[#212121] opacity-95 sticky">
       <div className="flex gap-8 items-center text-2xl">
-        <div>
+        <div className="cursor-pointer" onClick={ () => dispatch(sideBarVisibilityUpdate())}>
           <GiHamburgerMenu />
         </div>
         <Link to="/">

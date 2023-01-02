@@ -20,7 +20,11 @@ import { FaRegCompass } from "react-icons/fa";
 import { GiFilmStrip, GiHamburgerMenu } from "react-icons/gi";
 import { BsYoutube } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { sideBarVisibilityUpdate } from "../store";
 const Sidebar = () => {
+  const dispatch = useDispatch();
+
   const mainLinks = [
     {
       icon: <MdHomeFilled className="text-xl" />,
@@ -126,8 +130,8 @@ const Sidebar = () => {
         style={{ width: "262px", height: "100%" }}
         className="  bg-[#212121] pr-5 overflow-y-scroll pb-8 sidebar"
       >
-        <div className="flex gap-8 items-center text-2xl h-16 pl-6">
-          <div >
+        <div className="flex gap-8 items-center text-2xl h-14 pl-6">
+          <div className="cursor-pointer" onClick={() => dispatch(sideBarVisibilityUpdate())}>
             <GiHamburgerMenu />
           </div>
           <Link to="/">
@@ -214,7 +218,7 @@ const Sidebar = () => {
           This clone is for educational purpose only.
         </p>
       </div>
-      <div></div>
+      <div className={styles.sidecContainer} onClick = {() => dispatch(sideBarVisibilityUpdate())}></div>
     </div>
   );
 };

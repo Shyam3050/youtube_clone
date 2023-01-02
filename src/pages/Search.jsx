@@ -51,7 +51,7 @@ const Search = () => {
                 const ran_num = Math.random();
                 return (
                   <div className="my-5" key={item.videoId + ran_num.toString()}>
-                    <SearchCard data={item} />;
+                    <SearchCard data={item} />
                   </div>
                 );
               })}
