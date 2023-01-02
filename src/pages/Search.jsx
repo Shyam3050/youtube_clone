@@ -8,6 +8,7 @@ import SearchCard from "../Component/SearchCard";
 import { getSearchPageVideos } from "../store/reducers/getSearchPageVideo";
 import { clearSearchPageVideo } from "../store";
 import { useNavigate } from "react-router-dom";
+import MiniGuideBar from "../Component/MiniGuideBar";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -29,11 +30,14 @@ const Search = () => {
 
   return (
     <div className="max-h-screen overflow-hidden">
-      <div style={{ height: "7.5vh" }}>
+      <div>
         <Navbar />
       </div>
-      <div className="flex pt-3" style={{ height: "92.5vh" }}>
-        <Sidebar />
+      <div className="flex" style={{ height: "92.5vh" }}>
+        <div style={{ width: "72px" }}>
+          <MiniGuideBar />
+        </div>
+
         {searchVideos.length ? (
           <div className="py-8 pl-8 flex flex-col gap-5 w-full">
             <InfiniteScroll

@@ -9,6 +9,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../Component/Card";
 import VideoSkelton from "../Component/UI/VideoSkelton";
 import { clearVideos } from "../store";
+import MiniGuideBar from "../Component/MiniGuideBar";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ const Home = () => {
         <Navbar />
       </div>
       <div className="flex" style={{ height: "92.5vh" }}>
-        <Sidebar />
+        <div style={{ width: "72px" }}>
+          <MiniGuideBar />
+        </div>
 
         {videos.length ? (
           <InfiniteScroll
