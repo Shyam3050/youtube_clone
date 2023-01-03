@@ -32,6 +32,7 @@ const Home = () => {
         <div style={{ width: "72px" }}>
           <MiniGuideBar />
           {sideBarVisibility && <Sidebar />}
+        
         </div>
 
         {videos.length ? (

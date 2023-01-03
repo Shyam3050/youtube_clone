@@ -14,7 +14,8 @@ const initialYoutubeState = {
 };
 
 const initialUIState = {
-  sideBarVisibility: false
+  sideBarVisibility: false,
+  searchBar: false
 }
 
 const uiSlice = createSlice({
@@ -23,6 +24,9 @@ const uiSlice = createSlice({
   reducers: {
     sideBarVisibilityUpdate: state =>{
       state.sideBarVisibility = !state.sideBarVisibility;
+    },
+    setSearchBarVisibility : state => {
+      state.searchBar = !state.searchBar;
     }
   }
 })
@@ -79,4 +83,4 @@ export const {
   clearSearchTerm,
   clearSearchPageVideo,
 } = youtubeSlice.actions;
-export const {sideBarVisibilityUpdate} = uiSlice.actions;
+export const {sideBarVisibilityUpdate,setSearchBarVisibility} = uiSlice.actions;

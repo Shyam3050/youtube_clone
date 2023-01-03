@@ -1,0 +1,15 @@
+.searchBarBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(17, 17, 17, 0.692);
+  /* z-index: 99; */
+  z-index: 99;
+}
+.remainSpace{
+    width: 100vw;
+    height: calc(100vh - 2.5rem);
+    background-color: rgba(0, 0, 0, 0.408);
+}
