@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../Component/Navbar";
 import Sidebar from "../Component/Sidebar";
-import Spinner from "../Component/Spinner";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomePageVideos } from "../store/reducers/getHomePageVideos";
@@ -15,7 +14,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.youtube_clone.videos);
   const sideBarVisibility = useSelector((state) => state.UI.sideBarVisibility);
-  console.log(sideBarVisibility);
 
   useEffect(() => {
     dispatch(clearVideos());

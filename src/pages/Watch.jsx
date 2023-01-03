@@ -53,10 +53,10 @@ const Watch = () => {
             <Navbar />
           </div>
           <div className="flex w-full" style={{ height: "92.5vh" }}>
-            <div className="flex gap-y-10 gap-x-5 p-7 mx-20 mr-0 w-full overflow-auto">
+            <div className="flex tablet:flex-col gap-y-10 gap-x-5 p-7 tablet:p-2 mr-0 w-full overflow-auto">
               <div style={{ maxWidth: "800px" }}>
                 <div>
-                  <div className="watch_container w-96 h-72">
+                  <div className="watch_container w-full h-96 ">
                   <iframe
                     width="100%"
                     height="100%"
@@ -68,7 +68,7 @@ const Watch = () => {
                     </div>
                   <div className="mt-5">
                     <p className="text-xl">{currentPlaying.videoTitle}</p>
-                    <div className="flex justify-between mt-1">
+                    <div className="flex justify-between mt-1 tablet:flex-col tablet:gap-4">
                       <div className="text-sm text-gray-400">
                         <span className="after:content-['•'] after:mx-1">
                           {currentPlaying.videoViews} views

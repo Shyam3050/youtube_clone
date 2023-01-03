@@ -17,6 +17,7 @@ const Search = () => {
   const searchVideos = useSelector(
     (state) => state.youtube_clone.searchResults
   );
+  const sideBarVisibility = useSelector((state) => state.UI.sideBarVisibility);
   const searchTerm = useSelector((state) => state.youtube_clone.searchTerm);
   console.log(searchVideos);
   useEffect(() => {
@@ -34,12 +35,12 @@ const Search = () => {
         <Navbar />
       </div>
       <div className="flex" style={{ height: "92.5vh" }}>
-        <div style={{ width: "72px" }}>
-          <MiniGuideBar />
+        <div  className= "search_mini_sidebar" >
+          <MiniGuideBar  />
+          {sideBarVisibility && <Sidebar />}
         </div>
-
         {searchVideos.length ? (
-          <div className="py-8 pl-8 flex flex-col gap-5 w-full">
+          <div className=" py-8 tablet:pl-2 pl-8 flex flex-col gap-5 w-full">
             <InfiniteScroll
               dataLength={searchVideos.length}
               next={() => dispatch(getSearchPageVideos(true))}

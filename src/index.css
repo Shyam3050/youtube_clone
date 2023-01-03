@@ -16,8 +16,9 @@ body {
   margin-top: 1rem;
 }
 @media (max-width: 530px) {
-  .grid_main_container{
+  .grid_main_container {
     width: 100%;
+
     margin-left: 0;
   }
 }
@@ -25,7 +26,6 @@ body {
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
-  
 }
 ::-webkit-scrollbar {
   background-color: transparent;
@@ -35,4 +35,12 @@ body {
 ::-webkit-scrollbar-thumb {
   background-color: #6a6969;
   border-radius: 1rem;
+}
+.search_mini_sidebar {
+  width: 72px;
+}
+@media (max-width: 530px) {
+  .search_mini_sidebar {
+    display: none;
+  }
 }
