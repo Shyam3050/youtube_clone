@@ -41,7 +41,7 @@ const Home = () => {
             dataLength={videos.length}
             next={() => dispatch(getHomePageVideos(true))}
             hasMore={videos.length < 500}
-            loader={<Spinner />}
+            
             height={650}
           >
             <div className="grid_main_container">

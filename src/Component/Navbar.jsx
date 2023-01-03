@@ -1,5 +1,5 @@
 import React from "react";
-import  User from "./UI/user.png"
+import User from "./UI/user.png";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import { TiMicrophone } from "react-icons/ti";
 import { BsYoutube, BsCameraVideo, BsBell } from "react-icons/bs";
@@ -10,11 +10,12 @@ import {
   clearSearchPageVideo,
   changeSearchTerm,
   clearSearchTerm,
-  sideBarVisibilityUpdate
+  sideBarVisibilityUpdate,
 } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getSearchPageVideos } from "../store/reducers/getSearchPageVideo";
+import styles from "../Css/Navbar.module.css";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -26,16 +27,19 @@ const Navbar = () => {
     e.preventDefault();
     if (location.pathname !== "/search") {
       navigate("/search");
-    }else{
+    } else {
       dispatch(clearSearchPageVideo());
       dispatch(getSearchPageVideos());
     }
   }
 
   return (
-    <nav className="flex justify-between pl-6 pr-14 h-14 items-center  bg-[#212121] opacity-95 sticky">
-      <div className="flex gap-8 items-center text-2xl">
-        <div className="cursor-pointer" onClick={ () => dispatch(sideBarVisibilityUpdate())}>
+    <nav className="flex justify-between  tablet:pl-2 tablet:pr-2 pl-6 pr-14 h-14 items-center  bg-[#212121] opacity-95 sticky">
+      <div className="flex gap-8 mobile:gap-2 items-center text-2xl">
+        <div
+          className="cursor-pointer"
+          onClick={() => dispatch(sideBarVisibilityUpdate())}
+        >
           <GiHamburgerMenu />
         </div>
         <Link to="/">
@@ -45,16 +49,17 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
-      <div className="flex items-center justify-center gap-5">
+      <div className=" tablet:hidden flex items-center justify-center gap-5">
         <form onSubmit={searchHandler}>
           <div className="flex bg-zinc-900 items-center h-10 px-4 pr-0">
             <div className="flex gap-4 items-center pr-5">
               <div>
-                <AiOutlineSearch className="text-xl" />
+                <AiOutlineSearch className=" text-xl" />
               </div>
               <input
                 type="text"
-                className="w-96  bg-zinc-900 focus:outline-none  border-none"
+                style={{ width: "20vw" }}
+                className=" bg-zinc-900 focus:outline-none  border-none"
                 value={searchTerm}
                 onChange={(e) => {
                   dispatch(changeSearchTerm(e.target.value));
@@ -77,19 +82,22 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex gap-5 items-center text-xl">
-        <BsCameraVideo />
-        <IoAppsSharp />
+        <div>
+          <AiOutlineSearch className="text-2xl" />
+        </div>
+        <div className="tablet:hidden">
+          <BsCameraVideo />
+        </div>
+        <div className="tablet:hidden">
+          <IoAppsSharp />
+        </div>
         <div className="relative">
           <BsBell />
           <span className="absolute bottom-2 left-2 text-xs bg-red-600 rounded-full px-1">
             9+
           </span>
         </div>
-        <img
-          src= {User}
-          alt="user-logo"
-          className="w-9 h-9 rounded-full "
-        />
+        <img src={User} alt="user-logo" className="w-9 h-9 rounded-full " />
       </div>
     </nav>
   );

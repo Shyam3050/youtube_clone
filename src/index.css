@@ -13,6 +13,13 @@ body {
   width: calc(100vw - 72px);
   height: 100vh;
   margin-left: 72px;
+  margin-top: 1rem;
+}
+@media (max-width: 530px) {
+  .grid_main_container{
+    width: 100%;
+    margin-left: 0;
+  }
 }
 .grid_container {
   height: 100vh;
