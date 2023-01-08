@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import styles from "./componentCss/Navbar.module.css";
 import User from "./UI/user.png";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import { TiMicrophone } from "react-icons/ti";
 import { BsYoutube, BsCameraVideo, BsBell } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { BiArrowBack } from "react-icons/bi";
 import { IoAppsSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import {
@@ -19,123 +21,121 @@ import { getSearchPageVideos } from "../store/reducers/getSearchPageVideo";
 import SerachBarMobile from "./UI/SerachBarMobile";
 
 const Navbar = () => {
+  const [search_bar, setSearch_bar] = useState(false);
+
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const searchTerm = useSelector((state) => state.youtube_clone.searchTerm);
   const searchBar = useSelector((state) => state.UI.searchBar);
 
-
   function searchHandler(e) {
     e.preventDefault();
     if (location.pathname !== "/search") {
       navigate("/search");
     } else {
-      dispatch(setSearchBarVisibility())
+      dispatch(setSearchBarVisibility());
       dispatch(clearSearchPageVideo());
       dispatch(getSearchPageVideos());
     }
   }
 
+  function searchBar_render() {
+    setSearch_bar((state) => !state);
+  }
+
+  console.log(search_bar);
+  const nav_end_profile = (
+    <div className={`${styles.end}`}>
+      <div className="text-xl p-2 ml-3">
+        <BsCameraVideo />
+      </div>
+      <div className="relative ">
+        <BsBell className="text-xl ml-2" />
+        <span className="absolute bottom-2 left-2 text-xs bg-red-600 rounded-full px-1">
+          9+
+        </span>
+      </div>
+      <div className={`${styles.user}` + " ml-2"}>
+        <img src={User} alt="user-logo" className="img_w_100 " />
+      </div>
+    </div>
+  );
+
+  const sign_in = <button className={`${styles.sign_in}`}>Sign-in</button>;
+
   return (
     <>
-      <nav className="flex justify-between  tablet:pl-2 tablet:pr-2 pl-6 pr-14 h-14 items-center  bg-[#212121] opacity-95 sticky">
-        <div className="flex gap-8 mobile:gap-2 items-center text-2xl">
-          <div
-            className="cursor-pointer"
-            onClick={() => dispatch(sideBarVisibilityUpdate())}
-          >
-            <GiHamburgerMenu />
-          </div>
-          <Link to="/">
-            <div className="flex items-center justify-center">
-              <BsYoutube className=" text-3xl text-red-600 " />
-              <span className="text-xl font-medium">YouTube</span>
+      <nav className={`${styles.navbar}`}>
+        <div className={`${styles.container}`}>
+          <div className={`${styles.start}`}>
+            <div
+              className={`${styles.back} ${
+                search_bar ? " visible" : " hidden"
+              } `} onClick = {() => searchBar_render()}
+            >
+              <BiArrowBack />
             </div>
-          </Link>
-        </div>
-        <div className=" tablet:hidden flex items-center justify-center gap-5">
-          <form onSubmit={searchHandler}>
-            <div className="flex bg-zinc-900 items-center h-10 px-4 pr-0">
-              <div className="flex gap-4 items-center pr-5">
-                <div>
-                  <AiOutlineSearch className=" text-xl" />
+            <div
+              className={`${styles.menubar}  ${
+                search_bar ? " hidden" : " visible"
+              }`}
+              onClick={() => dispatch(sideBarVisibilityUpdate())}
+            >
+              <GiHamburgerMenu />
+            </div>
+            <Link to="/" className={` ${search_bar ? " hidden" : " visible"}`}>
+              <div className={`${styles.youtube_logo}`}>
+                <div className={`${styles.icon}`}>
+                  <BsYoutube />
                 </div>
-                <input
-                  type="text"
-                  style={{ width: "20vw" }}
-                  className=" bg-zinc-900 focus:outline-none  border-none"
-                  value={searchTerm}
-                  onChange={(e) => {
-                    dispatch(changeSearchTerm(e.target.value));
-                  }}
-                />
-                <AiOutlineClose
-                  className={`text-xl cursor-pointer  ${
-                    searchTerm ? "visible " : "invisible"
-                  }`}
-                  onClick={() => dispatch(clearSearchTerm())}
-                />
+                <span className={`${styles.icon_text}`}>YouTube</span>
               </div>
-              <button className="h-10 w-16 flex items-center justify-center bg-zinc-800">
-                <AiOutlineSearch className="text-xl" />
-              </button>
+            </Link>
+          </div>
+          <div className={`${styles.center}`}>
+            <div
+              className={`${styles.input_container}  ${
+                search_bar ? " visible" : " hidden"
+              } `}
+            >
+              <form className="">
+                <div className="w-full flex justify-end items-center ">
+                  <input type="text" className={`${styles.input}`} />
+                  <div className={`${styles.close}`}>
+                    <AiOutlineClose
+                      className={`text-xl cursor-pointer  ${
+                        searchTerm ? "visible " : "visible"
+                      }`}
+                      onClick={() => dispatch(clearSearchTerm())}
+                    />
+                  </div>
+
+                  <button className={`${styles.search_btn}`}>
+                    <AiOutlineSearch className="text-2xl " />
+                  </button>
+                </div>
+              </form>
             </div>
-          </form>
-          <div className="text-xl p-3 bg-zinc-900 rounded-full">
-            <TiMicrophone />
+
+            <div
+              className={` ${search_bar ? " hidden" : " visible"}`}
+              onClick={() => searchBar_render()}
+            >
+              <AiOutlineSearch className="text-2xl cursor-pointer" />
+            </div>
+            <div
+              className={
+                ` ${search_bar ? " hidden" : " visible"}` +
+                "   text-xl p-2 ml-3 bg-zinc-900 rounded-full "
+              }
+            >
+              <TiMicrophone />
+            </div>
           </div>
-        </div>
-        <div className="flex gap-5 items-center text-xl">
-          <div className="laptop:hidden" onClick={() => dispatch(setSearchBarVisibility())}>
-            <AiOutlineSearch className="text-2xl cursor-pointer" />
-          </div>
-          <div className="tablet:hidden">
-            <BsCameraVideo />
-          </div>
-          <div className="tablet:hidden">
-            <IoAppsSharp />
-          </div>
-          <div className="relative">
-            <BsBell />
-            <span className="absolute bottom-2 left-2 text-xs bg-red-600 rounded-full px-1">
-              9+
-            </span>
-          </div>
-          <img src={User} alt="user-logo" className="w-9 h-9 rounded-full " />
+          <div className={`${styles.end}`}>{sign_in}</div>
         </div>
       </nav>
-      {searchBar && (
-        <SerachBarMobile>
-          <form onSubmit={searchHandler}>
-            <div className="flex bg-zinc-900  h-10  pr-0 ">
-              <div className="flex gap-4 items-center p-1 w-full bg-slate-800">
-                <div>
-                  <AiOutlineSearch className=" text-xl" />
-                </div>
-                <input
-                  type="text"
-                  style={{ width: "50vw" }}
-                  className=" bg-zinc-500 focus:outline-none  border-none"
-                  value={searchTerm}
-                  onChange={(e) => {
-                    dispatch(changeSearchTerm(e.target.value));
-                  }}
-                />
-                <AiOutlineClose
-                  className={`text-xl cursor-pointer  ${
-                    searchTerm ? "visible " : "invisible"
-                  }`}
-                  onClick={() => dispatch(clearSearchTerm())}
-                />
-              </div>
-              <button className="h-10 w-16 flex items-center justify-center bg-zinc-800">
-                <AiOutlineSearch className="text-xl" />
-              </button>
-            </div>
-          </form>
-        </SerachBarMobile>
-      )}
     </>
   );
 };

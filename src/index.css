@@ -43,3 +43,15 @@ body {
     display: none;
   }
 }
+
+:root {
+  --grey: #272727;
+  --light_grey: #3F3F3F;
+  --very_light_grey:  #5d5d5d;
+}
+
+.img_w_100 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

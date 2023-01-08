@@ -28,7 +28,7 @@ const Home = () => {
       <div>
         <Navbar />
       </div>
-      <div className="" style={{ height: "92.5vh" }}>
+      { <div className="" style={{ height: "92.5vh" }}>
         <div style={{ width: "72px" }}>
           <MiniGuideBar />
           {sideBarVisibility && <Sidebar />}
@@ -64,7 +64,7 @@ const Home = () => {
             </div>
           </div>
         )}
-      </div>
+      </div> }
     </div>
   );
 };
