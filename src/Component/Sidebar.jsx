@@ -19,11 +19,15 @@ import { TbMusic, TbDeviceGamepad2 } from "react-icons/tb";
 import { FaRegCompass } from "react-icons/fa";
 import { GiFilmStrip, GiHamburgerMenu } from "react-icons/gi";
 import { BsYoutube } from "react-icons/bs";
+import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector} from "react-redux";
 import { sideBarVisibilityUpdate } from "../store";
+import { logout } from "../store";
+
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const accessToken = useSelector(state => state.auth.accessToken )
 
   const mainLinks = [
     {
@@ -131,7 +135,10 @@ const Sidebar = () => {
         className="  bg-[#212121] pr-5 overflow-y-scroll pb-8 sidebar"
       >
         <div className="flex gap-8 items-center text-2xl h-14 pl-6">
-          <div className="cursor-pointer" onClick={() => dispatch(sideBarVisibilityUpdate())}>
+          <div
+            className="cursor-pointer"
+            onClick={() => dispatch(sideBarVisibilityUpdate())}
+          >
             <GiHamburgerMenu />
           </div>
           <Link to="/">
@@ -181,6 +188,15 @@ const Sidebar = () => {
               </li>
             );
           })}
+        { accessToken && <li
+            className={`pl-6 py-3 hover:bg-zinc-600 `}
+            onClick={() => dispatch(logout())}
+          >
+            <a href="#" className="flex items-center gap-5">
+              <BiLogOut className="text-xl" />
+              <span className="text-sm tracking-wider">Logout</span>
+            </a>
+          </li>}
         </ul>
         <ul className="flex flex-col border-b-2 border-gray-700">
           {helpLinks.map(({ icon, name }) => {
@@ -218,7 +234,10 @@ const Sidebar = () => {
           This clone is for educational purpose only.
         </p>
       </div>
-      <div className={styles.sidecContainer} onClick = {() => dispatch(sideBarVisibilityUpdate())}></div>
+      <div
+        className={styles.sidecContainer}
+        onClick={() => dispatch(sideBarVisibilityUpdate())}
+      ></div>
     </div>
   );
 };

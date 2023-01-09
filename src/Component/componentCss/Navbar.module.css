@@ -17,8 +17,8 @@
 }
 .center {
   flex: 1;
-  justify-content: flex-end;
-  margin-right: 1.5rem;
+  justify-content: center;
+  margin-right: .5rem;
 }
 
 .menubar {
@@ -53,15 +53,15 @@
   letter-spacing: -2px;
 }
 
-/* end */
-.end > * {
-  /* margin-inline: .25rem; */
-}
+
 .user {
   width: 30px;
   height: 30px;
   border-radius: 25px;
-}
+  overflow: hidden;
+  margin-left: .5rem;
+  background-color: var(--very_light_grey);
+ }
 .sign_in {
   padding: 0.25rem 1rem;
   border-radius: 1rem;
@@ -108,4 +108,6 @@
   /* background-color: red; */
   border-block: 2px solid var(--light_grey);
   padding: 0.45rem;
+  width: 34px;
+  height: 38px;
 }

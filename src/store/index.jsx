@@ -3,6 +3,7 @@ import { getHomePageVideos } from "./reducers/getHomePageVideos";
 import { getSearchPageVideos } from "./reducers/getSearchPageVideo";
 import { getVideoDetails } from "./reducers/getVideoDetails";
 import { getRecommendedVideos } from "./reducers/getRecomended";
+import { authentication } from "./reducers/authentication";
 
 const initialYoutubeState = {
   videos: [],
@@ -18,6 +19,33 @@ const initialUIState = {
   searchBar: false
 }
 
+const initialAuthState = {
+  accessToken: sessionStorage.getItem("youtube_token") ? sessionStorage.getItem("youtube_token") : "",
+  user: sessionStorage.getItem("youtube_profile") ? JSON.parse(sessionStorage.getItem("youtube_profile")) : {},
+}
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: initialAuthState,
+  reducers: {
+    logout: (state)=>{
+       state.accessToken = "";
+       state.user = {};
+       sessionStorage.removeItem("youtube_token")
+       sessionStorage.removeItem("youtube_profile")
+    } 
+  },
+  extraReducers: builder =>{
+  builder.addCase(authentication.fulfilled, (state, action) => {
+    state.accessToken = action.payload.accessToken;
+    state.user = action.payload.user;
+    sessionStorage.setItem("youtube_token", action.payload.accessToken);
+    sessionStorage.setItem("youtube_profile", JSON.stringify(action.payload.user))
+  })
+  }
+  
+})
+
 const uiSlice = createSlice({
   name: "UI",
   initialState: initialUIState,
@@ -25,9 +53,7 @@ const uiSlice = createSlice({
     sideBarVisibilityUpdate: state =>{
       state.sideBarVisibility = !state.sideBarVisibility;
     },
-    setSearchBarVisibility : state => {
-      state.searchBar = !state.searchBar;
-    }
+    
   }
 })
 
@@ -73,7 +99,8 @@ const youtubeSlice = createSlice({
 export const store = configureStore({
   reducer: {
     youtube_clone: youtubeSlice.reducer,
-    UI: uiSlice.reducer
+    UI: uiSlice.reducer,
+    auth: authSlice.reducer
   },
 });
 
@@ -83,4 +110,5 @@ export const {
   clearSearchTerm,
   clearSearchPageVideo,
 } = youtubeSlice.actions;
-export const {sideBarVisibilityUpdate,setSearchBarVisibility} = uiSlice.actions;
+export const {sideBarVisibilityUpdate} = uiSlice.actions;
+export const {logout} = authSlice.actions;
