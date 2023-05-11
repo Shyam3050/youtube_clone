@@ -1,4 +1,3 @@
-import firebase from "firebase/compat/app";
 import auth from "../../firebase";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
