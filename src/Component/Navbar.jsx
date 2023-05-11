@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./componentCss/Navbar.module.css";
-import User from "./UI/user.png";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import { TiMicrophone } from "react-icons/ti";
 import { BsYoutube, BsCameraVideo, BsBell } from "react-icons/bs";
@@ -27,7 +26,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const searchTerm = useSelector((state) => state.youtube_clone.searchTerm);
-  const {accessToken, user} = useSelector(state => state.auth)
+  const {accessToken, user,load} = useSelector(state => state.auth)
   
   
   function searchHandler(e) {
@@ -66,7 +65,7 @@ const Navbar = () => {
     </div>
   );
 
-  const sign_in = <button className={`${styles.sign_in}`} onClick = {() => dispatch(authentication())}>Sign-in</button>;
+  const sign_in = <button className={`${styles.sign_in}`} onClick = {() => dispatch(authentication())}>{load ? "load..":"Sign-in"}</button>;
 
   return (
     <>

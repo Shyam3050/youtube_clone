@@ -14,6 +14,8 @@ import { useSelector, useDispatch } from "react-redux";
 // components
 import Navbar from "../Component/Navbar";
 import WatchCard from "../Component/WatchCard";
+import MiniGuideBar from "../Component/MiniGuideBar";
+import Sidebar from "../Component/Sidebar";
 
 const Watch = () => {
   const [showMoreStatus, setShowMoreStatus] = useState(false);
@@ -23,12 +25,11 @@ const Watch = () => {
   const recommendedVideos = useSelector(
     (state) => state.youtube_clone.recommendedVideos
   );
-  
 
   const currentPlaying = useSelector(
     (state) => state.youtube_clone.currentPlaying
   );
-
+  const sideBarVisibility = useSelector((state) => state.UI.sideBarVisibility);
 
   useEffect(() => {
     if (id) {
@@ -42,7 +43,7 @@ const Watch = () => {
   useEffect(() => {
     if (currentPlaying && id) dispatch(getRecommendedVideos(id));
   }, [currentPlaying, dispatch, id]);
-  
+
   const renderCondition = currentPlaying && currentPlaying.videoId === id;
 
   return (
@@ -53,19 +54,23 @@ const Watch = () => {
             <Navbar />
           </div>
           <div className="flex w-full" style={{ height: "92.5vh" }}>
+            <div style={{ width: "72px" }}>
+              <MiniGuideBar />
+              {sideBarVisibility && <Sidebar />}
+            </div>
             <div className="flex tablet:flex-col gap-y-10 gap-x-5 p-7 tablet:p-2 mr-0 w-full overflow-auto">
               <div style={{ maxWidth: "800px" }}>
                 <div>
                   <div className="watch_container w-full h-96 ">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${id}?autoplay=1`}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${id}?autoplay=1`}
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
                     ></iframe>
-                    </div>
+                  </div>
                   <div className="mt-5">
                     <p className="text-xl">{currentPlaying.videoTitle}</p>
                     <div className="flex justify-between mt-1 tablet:flex-col tablet:gap-4">
@@ -87,14 +92,6 @@ const Watch = () => {
                         <div className="flex items-center gap-1 cursor-pointer">
                           <FaShare className="text-xl" />
                           <strong>share</strong>
-                        </div>
-                        <div className="flex items-center gap-1 cursor-pointer">
-                          <HiScissors className="text-xl" />
-                          <strong>clip</strong>
-                        </div>
-                        <div className="flex items-center gap-1 cursor-pointer">
-                          <MdOutlinePlaylistAdd className="text-xl" />
-                          <strong>save</strong>
                         </div>
                         <div className="flex items-center gap-1 cursor-pointer">
                           <BsThreeDots className="text-xl" />
@@ -156,7 +153,7 @@ const Watch = () => {
                     return <WatchCard data={item} key={item.videoId} />;
                   })
                 ) : (
-                 <p>Error</p>
+                  <p>Error</p>
                 )}
               </div>
             </div>

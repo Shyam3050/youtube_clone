@@ -1,9 +1,9 @@
 import React from "react";
 
-import VideoSkelton from "../Component/UI/VideoSkelton";
+
 
 const ErrorPage = () => {
-  return <VideoSkelton />;
+  return  <h1>404 Error</h1>;
 };
 
 export default ErrorPage;
