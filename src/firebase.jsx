@@ -1,4 +1,7 @@
-// import "firebase/compat/auth";
+// import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import { getApp, getApps, initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -10,6 +13,6 @@ const firebaseConfig = {
   appId: "1:519157297377:web:919bb31182020492e9c7a0",
 };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 export default auth;
